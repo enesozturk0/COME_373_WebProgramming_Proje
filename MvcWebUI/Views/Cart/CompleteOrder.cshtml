@@ -1,0 +1,56 @@
+﻿@model ShippingDetailsViewModel
+@{
+    Layout = "_DefLayout";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center" >
+        <div class="col-lg-6 col-md-8 col-12" >
+            <div class="card shadow-lg border-0 rounded-4" style="background-color:lightblue">
+                <div class="card-header bg-gradient-primary text-white text-center p-4">
+                    <h2 class="mb-0" style="color: darkorange;">Complete Your Order</h2>
+                    
+                </div>
+                <div class="card-body p-5" style="color:cadetblue">
+                    <form asp-controller="Cart" asp-action="CompleteOrder" method="post" class="needs-validation" novalidate>
+                        <div class="mb-4">
+                            <label asp-for="ShippingDetail.FirstName" class="form-label">First Name</label>
+                            <input asp-for="ShippingDetail.FirstName" class="form-control form-control-lg shadow-sm" placeholder="First name" required />
+                            <span asp-validation-for="ShippingDetail.FirstName" class="alert-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ShippingDetail.LastName" class="form-label">Last Name</label>
+                            <input asp-for="ShippingDetail.LastName" class="form-control form-control-lg shadow-sm" placeholder="Last name" required />
+                            <span asp-validation-for="ShippingDetail.LastName" class="alert-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ShippingDetail.Age" class="form-label">Age</label>
+                            <input asp-for="ShippingDetail.Age" class="form-control form-control-lg shadow-sm" type="number" min="0" max="120" placeholder="Age" required />
+                            <span asp-validation-for="ShippingDetail.Age" class="alert-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ShippingDetail.Address" class="form-label">Address</label>
+                            <textarea asp-for="ShippingDetail.Address" class="form-control form-control-lg shadow-sm" rows="4" placeholder="Enter your full address" required></textarea>
+                            <span asp-validation-for="ShippingDetail.Address" class="alert-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ShippingDetail.Email" class="form-label">Email</label>
+                            <input asp-for="ShippingDetail.Email" class="form-control form-control-lg shadow-sm"  asp-format="email" placeholder="example123@example.com" required />
+                            <span asp-validation-for="ShippingDetail.Email" class="alert-danger"></span>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" value="Kaydet" class="btn btn-primary btn-lg px-5 py-3 shadow-lg" style="font-size: 18px;">
+								<i class="bi bi-check-circle-fill">Complete Order</i>
+							</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.CodeAnalysis.CSharp.Syntax
+@model CartListViewModel
+@{
+	var totalPrice = Model.Cart.CartLines.Sum(c => c.Product.UnitPrice * c.Quantity);
+	ViewData["Title"] = "";
+	Layout = "_DefLayout";
+}
+
+<div class="container my-5">
+	<h1 class="text-center text-primary mb-4">Cart</h1>
+
+	@if (Model.Cart.CartLines.Count == 0)
+	{
+		<div class="alert alert-danger text-center">
+			<i class="bi bi-cart-x-fill"></i> Your cart is empty!
+		</div>
+	}
+	else
+	{
+		<div class="table-responsive">
+			<table class="table table-striped table-hover align-middle">
+				<thead class="table-dark">
+					<tr>
+
+						<th>Name</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th>         </th>
+
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var cartLine in Model.Cart.CartLines)
+					{
+						<tr>
+
+							<td>@cartLine.Product.ProductName</td>
+							<td>$@Convert.ToDouble(cartLine.Product.UnitPrice)</td>
+							<td>@cartLine.Quantity</td>
+							<td>
+								<a class="btn btn-sm btn-outline-danger"
+								   asp-controller="Cart" asp-action="RemoveFromCart"
+								   asp-route-productId="@cartLine.Product.ProductId">
+									<i class="bi bi-trash"></i> Remove
+								</a>
+							</td>
+						</tr>
+					}
+
+				</tbody>
+
+			</table>
+		</div>
+
+
+
+		<div class="text-end mt-3">
+			<h4>Total Price: $@Convert.ToDouble(totalPrice)</h4>
+			<a class="btn btn-success btn-lg" asp-controller="Cart" asp-action="CompleteOrder">
+				<i class="bi bi-check-circle-fill"></i> Complete Order
+			</a>
+		</div>
+	}
+</div>
+
